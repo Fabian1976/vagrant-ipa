@@ -1,0 +1,105 @@
+    1  less /var/log/me
+    2  less /var/log/messages 
+    3  ll
+    4  rm -rf ipa
+    5  rm ipa.tgz 
+    6  cd /etc/puppetlabs/code/environments/production/
+    7  ll
+    8  cd modules/
+    9  ll
+   10  vi ipa/puppet-ipa.spec.in 
+   11  vi ipa/manifests/params.pp 
+   12  vi ipa/manifests/server.pp 
+   13  cd ..
+   14  ll
+   15  puppet apply manifests/ipa-server.pp -t
+   16  date
+   17  hwclock 
+   18  hwclock --localtime
+   19  hwclock --localtime --show
+   20  hwclock --help
+   21  hwclock --localtime --hctosys
+   22  date
+   23  hwclock --systohc
+   24  date
+   25  shutdown -r now
+   26  w
+   27  date
+   28  kinit admin
+   29  id admin
+   30  getent passwd admin
+   31  yum provides *bin/ipa-adtrust-install
+   32  yum install ipa-server-trust-ad
+   33  ipa-adtrust-install --netbios-name=CORE2.CMC.LAN -a redhat123
+   34  vi /etc/sysconfig/iptables
+   35  systemctl restart iptables
+   36  systemctl enable iptables
+   37  ipa --version
+   38  ipa dnsforwardzone-add CORE-O --forwarder=192.168.23.10 --forward-policy=only
+   39  ipa dnsforwardzone-add CORE-O.local --forwarder=192.168.23.10 --forward-policy=only
+   40  ping core-o-dc01.core-o.local
+   41  nslookup core-o-dc01.core-o.local
+   42  dig
+   43  dig SRV _ldap._tcp.core-a
+   44  dig SRV _ldap._tcp.core2.cmc.lan
+   45  dig SRV _ldap._tcp.core-o.local
+   46  ipa-dns-install --disable-dnssec-master
+   47  vi /etc/named.conf 
+   48  service restart named
+   49  service named restart
+   50  ps -ef | grep nam
+   51  systemctl restart named
+   52  systemctl restart named-pkcs11
+   53  ipa dnsforwardzone-add CORE-O.local --forwarder=192.168.23.10 --forward-policy=only
+   54  ipa --help | grep forward
+   55  ipa --help
+   56  ipa dnsforwardzone-del CORE-O
+   57  ipa dnsforwardzone-del CORE-O.local
+   58  ipa dnsforwardzone-add CORE-O.local --forwarder=192.168.23.10 --forward-policy=only
+   59  dig SRV _ldap._tcp.core2.cmc.lan
+   60  dig SRV _ldap._tcp.core-0.local
+   61  nslookup
+   62  cat /etc/resolv.conf
+   63  vi /etc/resolv.conf
+   64  service krb5kdc restart
+   65  systemctl restart sssd
+   66  systemctl restart httpd
+   67  ping katello
+   68  ping katello.core2.cmc.lan
+   69  ping ipa.core2.cmc.lan
+   70  dig SRV _ldap._tcp.core2.cmc.lan
+   71  dig SRV _ldap._tcp.core-o.local
+   72  ping core-dc01.core-o.local
+   73  ping core-o-dc01.core-o.local
+   74  ping core-o-repo01.core-o.local
+   75  ping core-o-wds01.core-o.local
+   76  ping core-o-wds02.core-o.local
+   77  ipa trust-add --type=ad core-o.local --admin Administrator --password
+   78  ipa trust-fetch-domains
+   79  ipa trust-fetch-domains "CORE-O"
+   80  ipa trust-fetch-domains "CORE-O.local"
+   81  vi /etc/krb5.conf 
+   82  service krb5kdc restart
+   83  service sssd restart
+   84  ipa group-add --desc='core-o.local admins external map' ad_admins_external --external
+   85  ipa group-add --desc='core-o.local admins' ad_admins
+   86  ipa group-add-member ad_admins_external --external 'CORE-O\Domain Admins'
+   87  ipa group-add-member ad_admins --groups ad_admins_external
+   88  ssh Administrator@core-o.local
+   89  ssh Administrator@core-o.local ipa.core2.cmc.lan
+   90  ssh Administrator@core-o.local@ipa.core2.cmc.lan
+   91  ssh 'Fabian Is Gek@core-o.local'@ipa.core2.cmc.lan
+   92  ssh 'Fabian Is Gek'@core-o.local@ipa.core2.cmc.lan
+   93  ssh testuser@core-o.local@ipa.core2.cmc.lan
+   94  less /var/log/secure 
+   95  ssh testuser@core-o.local@ipa.core2.cmc.lan
+   96  ssh 'Fabian Is Gek'@core-o.local@ipa.core2.cmc.lan
+   97  less /var/log/secure 
+   98  ssh 'Fabian Is Gek'@core-o.local@ipa.core2.cmc.lan
+   99  less /var/log/secure 
+  100  ssh 'Fabian Is Gek@core-o.local'@ipa.core2.cmc.lan
+  101  less /var/log/secure 
+  102  ssh 'Fabian Is Gek@core-o.local@ipa.core2.cmc.lan'
+  103  less /var/log/secure 
+  104  ssh testuser2@core-o.local@ipa.core2.cmc.lan
+  105  history > ipa_commands.txt

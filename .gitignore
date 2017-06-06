@@ -1,0 +1,8 @@
+.DS_Store
+.vagrant
+puppet/Puppetfile.lock
+puppet/.tmp
+puppet/.librarian
+puppet/modules/ipa
+puppet/modules/stdlib
+puppet/modules/firewall
