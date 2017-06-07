@@ -43,9 +43,23 @@ class profile::ipa::server {
   }
 
   ipa_usergroupmember { 'fabian.vanderhoeven':
-    ensure    =>  present,
+    ensure    => present,
     groupname => 'test',
     type      => 'user'
+  }
+  ipa_hostgroup { 'testhostgroup':
+    ensure      => present,
+    description => 'Test hostgroup'
+  }
+  ipa_hostgroupmember { 'ipa.cmc.lan':
+    ensure    => present,
+    groupname => 'testhostgroup',
+    type      => 'host'
+  }
+  ipa_hostgroupmember { 'ipaservers':
+    ensure    => absent,
+    groupname => 'testhostgroup',
+    type      => 'group'
   }
 
   $httpports = ['80','443']
