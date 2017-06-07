@@ -27,24 +27,23 @@ class profile::ipa::server {
 #    forwarder      =>   '10.10.10.116'
 #  }
 
-#  ipa::server::user { 'fabian':
-#    ensure   => absent,
-#    login    => 'fabian.vanderhoeven',
-#    domain   => 'cmc.lan',
-#    first    => 'Fabian',
-#    last     => 'van der Hoeven',
-#    initials => 'FvdH',
-#    email    =>  'fabian.vanderhoeven@vermont24-7.com'
-#  }
+  ipa::server::user { 'fabian':
+    ensure   => present,
+    login    => 'fabian.vanderhoeven',
+    domain   => 'cmc.lan',
+    first    => 'Fabian',
+    last     => 'van der Hoeven',
+    initials => 'FvdH',
+    email    => 'fabian.vanderhoeven@vermont24-7.com'
+  }
 
   ipa_usergroup { 'test':
     ensure      => present,
-    description => 'Test groep',
-    gid         => '1025'
+    description => 'Test groep'
   }
 
   ipa_usergroupmember { 'fabian.vanderhoeven':
-    ensure    =>  absent,
+    ensure    =>  present,
     groupname => 'test',
     type      => 'user'
   }
