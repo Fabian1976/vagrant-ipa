@@ -61,6 +61,13 @@ class profile::ipa::server {
     groupname => 'testhostgroup',
     type      => 'group'
   }
+  ipa_sudorule { 'test':
+    description => 'Test rule'
+  }
+
+  ipa_sudoruleoption { '!authenticate':
+    sudorule => 'test'
+  }
 
   $httpports = ['80','443']
   $ldapport = '389'
