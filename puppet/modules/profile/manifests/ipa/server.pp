@@ -51,7 +51,7 @@ class profile::ipa::server {
     ensure      => present,
     description => 'Test hostgroup'
   }
-  ipa_hostgroupmember { 'ipa.cmc.lan':
+  ipa_hostgroupmember { 'ipa01.cmc.lan':
     ensure    => present,
     groupname => 'testhostgroup',
     type      => 'host'
