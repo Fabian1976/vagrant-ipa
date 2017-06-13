@@ -10,41 +10,43 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.manage_guest = true
   config.hostmanager.ignore_private_ip = false
   config.vm.provision :hostmanager
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "bento/centos-7.2"
-  config.vm.provision :shell, path: "bootstrap.sh"
-  #Disable default SSH port forward
-#  config.vm.network :forwarded_port, host: 2222, guest: 22, id: "ssh", disabled: true
-  #Set own SSH forward port
-#  config.vm.network :forwarded_port, host: 2220, guest: 22
+  config.vm.define "ipa01" do |ipa01|
+    ipa01.vm.box = "bento/centos-7.2"
+    ipa01.vm.hostname = 'ipa01.cmc.lan'
+    ipa01.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.114", nic_type: 'virtio'
 
-#  config.vm.network :forwarded_port, host: 5678, guest: 80
-#  config.vm.network :forwarded_port, host: 5434, guest: 5432
-  config.vm.hostname = 'ipa.cmc.lan'
-  config.vm.network "private_network", bridge: "vboxnet5", ip: "10.10.10.115"
-
-  config.vm.provider "virtualbox" do |vb|
-	vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
-	vb.memory = 2048
-	vb.customize ["modifyvm", :id, "--vram", "16"]
-#	file_to_disk = './tmp/large_disk.vdi'
-#	unless File.exist?(file_to_disk)
-#		vb.customize ['createhd', '--filename', file_to_disk, '--size', (100 * 1024) + 4]
-#	end
-#	vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
-	vb.gui = true
-	vb.name = "ipa-server"
+    ipa01.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+      vb.memory = 2048
+      vb.customize ["modifyvm", :id, "--vram", "20"]
+      vb.gui = true
+      vb.name = "ipa01"
+    end
+    #run provisioning
+    ipa01.vm.synced_folder 'puppet/hieradata', '/etc/puppetlabs/code/environments/production/hieradata/'
+    ipa01.vm.synced_folder 'puppet/manifests', '/etc/puppetlabs/code/environments/production/manifests/'
+    ipa01.vm.synced_folder 'puppet/modules', '/etc/puppetlabs/code/environments/production/modules/'
+    ipa01.vm.provision :shell, path: "bootstrap.sh"
   end
+  config.vm.define "ipa02" do |ipa02|
+    ipa02.vm.box = "bento/centos-7.2"
+    ipa02.vm.hostname = 'ipa02.cmc.lan'
+    ipa02.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.115"
 
-#  config.vm.provision 'puppet' do |puppet|
-#	puppet.manifests_path = 'puppet/manifests'
-#	puppet.manifest_file = 'site.pp'
-#	puppet.module_path = 'puppet/modules'
-#  end
+    ipa02.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+      vb.memory = 2048
+      vb.customize ["modifyvm", :id, "--vram", "20"]
+      vb.gui = true
+      vb.name = "ipa02"
+    end
+    #run provisioning
+    ipa02.vm.synced_folder 'puppet/hieradata', '/etc/puppetlabs/code/environments/production/hieradata/'
+    ipa02.vm.synced_folder 'puppet/manifests', '/etc/puppetlabs/code/environments/production/manifests/'
+    ipa02.vm.synced_folder 'puppet/modules', '/etc/puppetlabs/code/environments/production/modules/'
+    ipa02.vm.provision :shell, path: "bootstrap.sh"
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
