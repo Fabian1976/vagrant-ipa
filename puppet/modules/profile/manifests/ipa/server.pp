@@ -27,14 +27,11 @@ class profile::ipa::server {
 #    forwarder      =>   '10.10.10.116'
 #  }
 
-  ipa::server::user { 'fabian':
-    ensure   => present,
-    login    => 'fabian.vanderhoeven',
-    domain   => 'cmc.lan',
-    first    => 'Fabian',
-    last     => 'van der Hoeven',
-    initials => 'FvdH',
-    email    => 'fabian.vanderhoeven@vermont24-7.com'
+  ipa_user { 'fabian.vanderhoeven':
+    domain => 'cmc.lan',
+    first  => 'Fabian',
+    last   => 'van der Hoeven',
+    email  => 'fabian.vanderhoeven@vermont24-7.com'
   }
 
   ipa_usergroup { 'test':
