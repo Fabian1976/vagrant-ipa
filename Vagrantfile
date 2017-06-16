@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.ignore_private_ip = false
   config.vm.provision :hostmanager
 
-  config.vm.define "ipa01" do |ipa01|
+  config.vm.define "ipa01", primary: true do |ipa01|
     ipa01.vm.box = "bento/centos-7.2"
     ipa01.vm.hostname = 'ipa01.cmc.lan'
     ipa01.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.114", nic_type: 'virtio'
@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ipa01.vm.synced_folder 'puppet/modules', '/etc/puppetlabs/code/environments/production/modules/'
     ipa01.vm.provision :shell, path: "bootstrap.sh"
   end
-  config.vm.define "ipa02" do |ipa02|
+  config.vm.define "ipa02", autostart: false do |ipa02|
     ipa02.vm.box = "bento/centos-7.2"
     ipa02.vm.hostname = 'ipa02.cmc.lan'
     ipa02.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.115"
