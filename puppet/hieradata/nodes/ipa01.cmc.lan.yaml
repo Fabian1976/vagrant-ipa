@@ -7,3 +7,20 @@ ipa::server::dm_password: 'redhat123'
 ipa::server::admin_password: 'redhat123'
 ipa::server::shell: '/bin/bash'
 ipa::server::dns: true
+
+ipa::server::users:
+  'fabian.vanderhoeven':
+    domain: 'cmc.lan'
+    first: 'Fabian'
+    last: 'van der Hoeven'
+    email: 'fabian.vanderhoeven@vermont24-7.com'
+    memberofgroup:
+      'cmc_users':
+        ensure: present
+      'cmc_admins':
+        ensure: absent
+ipa::server::usergroups:
+  'cmc_users':
+    description: 'Users werkzaam bij CMC'
+  'cmc_admins':
+    description: 'Admin users'

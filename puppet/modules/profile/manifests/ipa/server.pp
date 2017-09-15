@@ -27,23 +27,6 @@ class profile::ipa::server {
 #    forwarder      =>   '10.10.10.116'
 #  }
 
-  ipa_user { 'fabian.vanderhoeven':
-    domain => 'cmc.lan',
-    first  => 'Fabian',
-    last   => 'van der Hoeven',
-    email  => 'fabian.vanderhoeven@vermont24-7.com'
-  }
-
-  ipa_usergroup { 'test':
-    ensure      => present,
-    description => 'Test groep'
-  }
-
-  ipa_usergroupmember { 'fabian.vanderhoeven':
-    ensure    => present,
-    groupname => 'test',
-    type      => 'user'
-  }
   ipa_hostgroup { 'testhostgroup':
     ensure      => present,
     description => 'Test hostgroup'
