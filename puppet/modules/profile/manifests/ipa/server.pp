@@ -1,13 +1,6 @@
 class profile::ipa::server {
   include ipa::server
 
-#  class { 'ipa::server':
-#    domain         => 'cmc.lan',
-#    dm_password    => 'redhat123',
-#    admin_password => 'redhat123',
-#    shell          => '/bin/bash',
-#    dns            => true
-#  }
 #  ipa_dnsrecord { 'test':
 #    ensure         => present,
 #    zone           => 'cmc.lan',
