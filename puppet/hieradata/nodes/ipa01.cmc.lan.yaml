@@ -1,7 +1,7 @@
 ---
 roles:
   - role::ipa::server
-
+ipa::server::version: '4.5.0'
 ipa::server::domain: 'cmc.lan'
 ipa::server::dm_password: 'redhat123'
 ipa::server::admin_password: 'redhat123'
