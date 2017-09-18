@@ -38,7 +38,8 @@ class profile::ipa::server {
     description => 'Test rule'
   }
 
-  ipa_sudoruleoption { '!authenticate':
+  ipa_sudoruleoption { 'test_authenticate':
+    option   => '!authenticate',
     sudorule => 'test'
   }
 

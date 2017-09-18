@@ -35,3 +35,15 @@ ipa::server::dnsrecords:
 #    ensure: absent
 #    create_reverse: false
     ipaddress: '10.10.10.119'
+
+ipa::server::sudorules:
+  'sudo_cmc_admins':
+    description: 'sudo rule for cmc_admins'
+    options:
+      - '!authenticate'
+    usergroups:
+      'cmc_admins':
+        ensure: present
+    hostgroups:
+      'ipaservers':
+        ensure: present
