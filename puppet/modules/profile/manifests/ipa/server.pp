@@ -7,7 +7,7 @@ class profile::ipa::server {
 #    ipaddress      => '10.10.10.117',
 #    require        => Ipa_zonerecord['10.in-addr.arpa', 'cmc.lan']
 #  }
-#  ipa_zonerecord { '10.in-addr.arpa':
+#  ipa_zonerecord { '10.10.10.in-addr.arpa':
 #    ensure         => present,
 #    ttl            => '1800',
 #  }
@@ -15,10 +15,10 @@ class profile::ipa::server {
 #    ensure         => present,
 #    ttl            => '3600'
 #  }
-#  ipa_forwardzonerecord { 'windows.cmc.lan':
-#    ensure         => absent,
-#    forwarder      =>   '10.10.10.116'
-#  }
+  ipa_forwardzonerecord { 'windows.cmc.lan':
+    ensure         => absent,
+    forwarder      =>   '10.10.10.116'
+  }
 
   ipa_hostgroup { 'testhostgroup':
     ensure      => present,

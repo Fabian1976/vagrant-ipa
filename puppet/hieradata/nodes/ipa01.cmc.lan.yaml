@@ -24,3 +24,14 @@ ipa::server::usergroups:
     description: 'Users werkzaam bij CMC'
   'cmc_admins':
     description: 'Admin users'
+
+ipa::server::dnszones:
+  '10.10.10.in-addr.arpa':
+    ttl: 1800
+ipa::server::dnsrecords:
+  'test.cmc.lan':
+    ipaddress: '10.10.10.117'
+  'bla.cmc.lan':
+#    ensure: absent
+#    create_reverse: false
+    ipaddress: '10.10.10.119'
