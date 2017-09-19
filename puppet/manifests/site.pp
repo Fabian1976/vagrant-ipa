@@ -1,13 +1,6 @@
 require stdlib
 
-Package {allow_virtual => false}
-
-
-unless $instance      {$instance      = hiera('instance', 'undef')}
-unless $depzone       {$depzone       = hiera('depzone', 'undef')}
-unless $platform      {$platform      = hiera('platform', 'cmc')}
-unless $organisation  {$organisation  = hiera('organisation','cmc')}
-
+Package {allow_virtual   => false}
 
 #
 # Om de modules compatible te houden tussen RHEL5 en RHEL6, introduceren
@@ -23,8 +16,7 @@ case $operatingsystemmajrelease {
     $output_chain_name = 'OUTPUT'
   }
   default: {
-#    fail('unsuported OS version.')
   }
 }
 
-hiera_include('roles')
+lookup('roles', {merge =>  unique}).include
