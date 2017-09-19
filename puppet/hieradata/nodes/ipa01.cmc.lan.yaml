@@ -48,11 +48,14 @@ ipa::server::sudorules:
       'ipaservers':
         ensure: present
     cmdgroups:
-      'Puppet':
+      'puppet':
+        ensure: present
+    runasusers:
+      'root':
         ensure: present
 
 ipa::server::sudocmdgroups:
-  'Puppet':
+  'puppet':
     ensure: present
     commands:
       '/bin/puppet':
