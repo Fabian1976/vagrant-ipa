@@ -6,21 +6,6 @@ class profile::ipa::server {
     forwarder      =>   '10.10.10.116'
   }
 
-  ipa_hostgroup { 'testhostgroup':
-    ensure      => present,
-    description => 'Test hostgroup'
-  }
-  ipa_hostgroupmember { 'ipa01.cmc.lan':
-    ensure    => present,
-    groupname => 'testhostgroup',
-    type      => 'host'
-  }
-  ipa_hostgroupmember { 'ipaservers':
-    ensure    => absent,
-    groupname => 'testhostgroup',
-    type      => 'group'
-  }
-
   $httpports = ['80','443']
   $ldapport = '389'
   $slapport = '636'

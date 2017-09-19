@@ -25,6 +25,13 @@ ipa::server::usergroups:
   'cmc_admins':
     description: 'Admin users'
 
+ipa::server::hostgroups:
+  'testhostgroup':
+    members:
+      'ipa01.cmc.lan':
+        type: 'host'
+        ensure: present
+
 ipa::server::dnszones:
   '10.10.10.in-addr.arpa':
     ttl: 1800
