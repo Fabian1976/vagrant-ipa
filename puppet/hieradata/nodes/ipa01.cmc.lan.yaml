@@ -47,3 +47,11 @@ ipa::server::sudorules:
     hostgroups:
       'ipaservers':
         ensure: present
+
+ipa::server::sudocmdgroups:
+  'Puppet':
+    ensure: present
+    commands:
+      '/bin/puppet':
+        ensure: present
+    
