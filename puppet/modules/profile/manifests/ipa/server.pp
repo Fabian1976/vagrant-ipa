@@ -1,11 +1,6 @@
 class profile::ipa::server {
   include ipa::server
 
-  ipa_forwardzonerecord { 'windows.cmc.lan':
-    ensure         => absent,
-    forwarder      =>   '10.10.10.116'
-  }
-
   $httpports = ['80','443']
   $ldapport = '389'
   $slapport = '636'

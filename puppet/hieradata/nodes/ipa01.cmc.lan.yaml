@@ -43,6 +43,10 @@ ipa::server::dnsrecords:
 #    create_reverse: false
     ipaddress: '10.10.10.119'
 
+ipa::server::dnsforwardzones:
+  'windows.cmc.lan':
+    forwarder: '10.10.10.116'
+
 ipa::server::sudorules:
   'sudo_cmc_admins':
     description: 'sudo rule for cmc_admins'
