@@ -80,3 +80,16 @@ ipa::server::sudocmdgroups:
       '/usr/local/bin/puppet':
         ensure: present
     
+ipa::server::hbacrules:
+  'hbac_test':
+    ensure: present
+    hostgroups:
+      testhostgroup:
+        ensure: absent
+      ipaservers:
+        ensure: present
+    usergroups:
+      cmc_admins:
+        ensure: present
+      cmc_users:
+        ensure: present
