@@ -84,12 +84,12 @@ ipa::server::hbacrules:
   'hbac_test':
     ensure: present
     hostgroups:
-      testhostgroup:
+      'testhostgroup':
         ensure: absent
-      ipaservers:
+      'ipaservers':
         ensure: present
     usergroups:
-      cmc_admins:
+      'cmc_admins':
         ensure: present
-      cmc_users:
+      'cmc_users':
         ensure: present
