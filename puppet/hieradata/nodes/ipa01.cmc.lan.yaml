@@ -10,6 +10,7 @@ ipa::server::dns: true
 
 ipa::server::users:
   'fabian.vanderhoeven':
+#    gidnumber: '16777219'
     domain: 'cmc.lan'
     first: 'Fabian'
     last: 'van der Hoeven'
@@ -24,6 +25,11 @@ ipa::server::usergroups:
     description: 'Users werkzaam bij CMC'
   'cmc_admins':
     description: 'Admin users'
+  'test':
+    description: 'Test group'
+    memberofgroup:
+      'cmc_users':
+        ensure: present
 
 ipa::server::hostgroups:
   'testhostgroup':
