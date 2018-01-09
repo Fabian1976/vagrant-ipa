@@ -6,4 +6,4 @@ mod 'puppetlabs-stdlib', '4.17.0'
 mod 'puppetlabs-firewall', '1.9.0'
 mod 'purpleidea-ipa',
   :git => 'https://github.com/Fabian1976/puppet-ipa.git',
-  :ref => 'master'
+  :ref => '1.0.3'
