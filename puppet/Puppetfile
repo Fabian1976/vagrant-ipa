@@ -2,7 +2,7 @@
 
 forge "https://forgeapi.puppetlabs.com"
 
-mod 'puppetlabs-stdlib', '4.17.0'
+mod 'puppetlabs-stdlib', '4.13.1'
 mod 'puppetlabs-firewall', '1.11.0'
 mod 'purpleidea-ipa',
   :git => 'https://github.com/Fabian1976/puppet-ipa.git',
