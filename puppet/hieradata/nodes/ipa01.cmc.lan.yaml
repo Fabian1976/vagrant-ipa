@@ -99,3 +99,9 @@ ipa::server::hbacrules:
         ensure: present
       'cmc_users':
         ensure: present
+ipa::server::pwpolicies:
+  'admins':
+    priority: '1'
+    maxlifetime: '3650'
+  'global_policy':
+    maxlifetime: '30'
