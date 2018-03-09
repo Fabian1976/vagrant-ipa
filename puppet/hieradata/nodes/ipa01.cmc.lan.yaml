@@ -43,11 +43,10 @@ ipa::server::dnszones:
     ttl: 1800
 ipa::server::dnsrecords:
   'test.cmc.lan':
-    ipaddress: '10.10.10.117'
-  'bla.cmc.lan':
-#    ensure: absent
-#    create_reverse: false
-    ipaddress: '10.10.10.119'
+    ipaddress:
+      - '10.10.10.118'
+      - '10.10.10.117'
+    create_reverse: false
 
 ipa::server::dnsforwardzones:
   'windows.cmc.lan':
@@ -56,13 +55,23 @@ ipa::server::dnsforwardzones:
 ipa::server::sudorules:
   'sudo_cmc_admins':
     description: 'sudo rule for cmc_admins'
+    hostcategory: 'all'
+    cmdcategory: 'all'
     options:
       - '!authenticate'
     usergroups:
       'cmc_admins':
         ensure: present
-    hostgroups:
-      'ipaservers':
+    runasusers:
+      'root':
+        ensure: present
+  'sudo_cmc_users':
+    description: 'sudo rule for cmc_users'
+    hostcategory: 'all'
+    options:
+      - '!authenticate'
+    usergroups:
+      'cmc_users':
         ensure: present
     cmdgroups:
       'puppet':
@@ -85,7 +94,7 @@ ipa::server::sudocmdgroups:
         ensure: present
       '/usr/local/bin/puppet':
         ensure: present
-    
+
 ipa::server::hbacrules:
   'hbac_test':
     ensure: present
