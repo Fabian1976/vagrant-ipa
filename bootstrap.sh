@@ -16,7 +16,7 @@ rm -f /etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 #delete host as localhost
 sed -i '1d' /etc/hosts
-echo "10.10.10.110 katello.cmc.lan" >> /etc/hosts
+echo "10.10.10.110 katello.vermont24-7.local" >> /etc/hosts
 
 #install vim
 yum install -y vim

@@ -1,8 +1,8 @@
 ---
 roles:
   - role::ipa::server
-ipa::server::version: '4.5.0'
-ipa::server::domain: 'cmc.lan'
+ipa::server::version: '4.5.4'
+ipa::server::domain: 'vermont24-7.local'
 ipa::server::dm_password: 'redhat123'
 ipa::server::admin_password: 'redhat123'
 ipa::server::shell: '/bin/bash'
@@ -11,30 +11,30 @@ ipa::server::dns: true
 ipa::server::users:
   'fabian.vanderhoeven':
 #    gidnumber: '16777219'
-    domain: 'cmc.lan'
+    domain: 'vermont24-7.local'
     first: 'Fabian'
     last: 'van der Hoeven'
     email: 'fabian.vanderhoeven@vermont24-7.com'
     memberofgroup:
-      'cmc_users':
+      'vermont_users':
         ensure: present
-      'cmc_admins':
+      'vermont_admins':
         ensure: absent
 ipa::server::usergroups:
-  'cmc_users':
-    description: 'Users werkzaam bij CMC'
-  'cmc_admins':
-    description: 'Admin users'
+  'vermont_users':
+    description: 'Users werkzaam bij Vermont'
+  'vermont_admins':
+    description: 'Admin users werkzaam bij Vermont'
   'test':
-    description: 'Test group'
+    description: 'Test inherited group'
     memberofgroup:
-      'cmc_users':
+      'vermont_users':
         ensure: present
 
 ipa::server::hostgroups:
   'testhostgroup':
     members:
-      'ipa01.cmc.lan':
+      'ipa01.vermont24-7.local':
         type: 'host'
         ensure: present
 
@@ -42,36 +42,36 @@ ipa::server::dnszones:
   '10.10.10.in-addr.arpa':
     ttl: 1800
 ipa::server::dnsrecords:
-  'test.cmc.lan':
+  'test.vermont24-7.local':
     ipaddress:
       - '10.10.10.118'
       - '10.10.10.117'
     create_reverse: false
 
 ipa::server::dnsforwardzones:
-  'windows.cmc.lan':
+  'windows.vermont24-7.local':
     forwarder: '10.10.10.116'
 
 ipa::server::sudorules:
-  'sudo_cmc_admins':
-    description: 'sudo rule for cmc_admins'
+  'sudo_vermont_admins':
+    description: 'sudo rule for vermont_admins'
     hostcategory: 'all'
     cmdcategory: 'all'
     options:
       - '!authenticate'
     usergroups:
-      'cmc_admins':
+      'vermont_admins':
         ensure: present
     runasusers:
       'root':
         ensure: present
-  'sudo_cmc_users':
-    description: 'sudo rule for cmc_users'
+  'sudo_vermont_users':
+    description: 'sudo rule for vermont_users'
     hostcategory: 'all'
     options:
       - '!authenticate'
     usergroups:
-      'cmc_users':
+      'vermont_users':
         ensure: present
     cmdgroups:
       'puppet':
@@ -104,9 +104,9 @@ ipa::server::hbacrules:
       'ipaservers':
         ensure: present
     usergroups:
-      'cmc_admins':
+      'vermont_admins':
         ensure: present
-      'cmc_users':
+      'vermont_users':
         ensure: present
 ipa::server::pwpolicies:
   'admins':

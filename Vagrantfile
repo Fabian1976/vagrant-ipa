@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "ipa01", primary: true do |ipa01|
     ipa01.vm.box = "bento/centos-7.4"
-    ipa01.vm.hostname = 'ipa01.cmc.lan'
+    ipa01.vm.hostname = 'ipa01.vermont24-7.local'
     ipa01.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.114", nic_type: 'virtio'
 
     ipa01.vm.provider "virtualbox" do |vb|
@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.define "ipa02", autostart: false do |ipa02|
     ipa02.vm.box = "bento/centos-7.4"
-    ipa02.vm.hostname = 'ipa02.cmc.lan'
+    ipa02.vm.hostname = 'ipa02.vermont24-7.local'
     ipa02.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.115"
 
     ipa02.vm.provider "virtualbox" do |vb|
