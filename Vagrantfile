@@ -32,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ipa02", autostart: false do |ipa02|
     ipa02.vm.box = "bento/centos-7.4"
     ipa02.vm.hostname = 'ipa02.vermont24-7.local'
-    ipa02.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.115"
+    ipa02.vm.network "private_network", bridge: "vboxnet1", ip: "10.10.10.115", dns: "10.10.10.114"
 
     ipa02.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
@@ -45,7 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ipa02.vm.synced_folder 'puppet/hieradata', '/etc/puppetlabs/code/environments/production/hieradata/'
     ipa02.vm.synced_folder 'puppet/manifests', '/etc/puppetlabs/code/environments/production/manifests/'
     ipa02.vm.synced_folder 'puppet/modules', '/etc/puppetlabs/code/environments/production/modules/'
-    ipa02.vm.provision :shell, path: "bootstrap.sh"
+    ipa02.vm.provision :shell, path: "bootstrap_client.sh"
   end
 
   # Disable automatic box update checking. If you disable this, then
