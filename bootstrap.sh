@@ -1,6 +1,6 @@
 #!/bin/bash
 #install epel repo
-yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum -y localinstall https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 #install entropy agent
 yum install -y haveged
 systemctl start haveged
@@ -28,10 +28,10 @@ mkdir -p /root/.vim
 git clone https://github.com/rodjek/vim-puppet.git /root/.vim/
 
 #Install puppet repo
-yum -y install http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+yum -y localinstall http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 #http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 #Install puppet
-yum -y install puppet
+yum -y install puppet-agent
 
 #Apply puppet manifest
 /opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/environments/production/manifests/site.pp
