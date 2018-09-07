@@ -39,6 +39,12 @@ ipa::server::hostgroups:
       'ipa01.vermont24-7.local':
         type: 'host'
         ensure: present
+  ipaservers:
+    members:
+      ipa01.vermont24-7.local:
+        type: 'host'
+      ipa02.vermont24-7.local:
+        type: 'host'
 
 ipa::server::dnszones:
   '10.10.10.in-addr.arpa':
@@ -46,9 +52,16 @@ ipa::server::dnszones:
 ipa::server::dnsrecords:
   'test.vermont24-7.local':
     ipaddress:
-      - '10.10.10.118'
       - '10.10.10.117'
+      - '10.10.10.118'
     create_reverse: false
+ipa::server::dnsrecords:
+  ipa01.vermont24-7.local:
+    ipaddress: '10.10.10.114'
+    create_reverse: true
+  ipa02.vermont24-7.local:
+    ipaddress: '10.10.10.115'
+    create_reverse: true
 
 ipa::server::dnsforwardzones:
   'windows.vermont24-7.local':
