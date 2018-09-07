@@ -1,0 +1,8 @@
+---
+roles:
+  - role::ipa::replica
+
+profile::ipa::replica::version: '4.5.4'
+profile::ipa::replica::managed: true
+profile::ipa::replica::dns: true
+
