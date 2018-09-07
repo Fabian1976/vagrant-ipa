@@ -1,12 +1,14 @@
 ---
 roles:
   - role::ipa::server
-ipa::server::version: '4.5.4'
-ipa::server::domain: 'vermont24-7.local'
-ipa::server::dm_password: 'redhat123'
-ipa::server::admin_password: 'redhat123'
-ipa::server::shell: '/bin/bash'
-ipa::server::dns: true
+
+profile::ipa::server::version: '4.5.4'
+profile::ipa::server::domain: 'vermont24-7.local'
+profile::ipa::server::dm_password: 'redhat123'
+profile::ipa::server::admin_password: 'redhat123'
+profile::ipa::server::shell: '/bin/bash'
+profile::ipa::server::managed: true
+profile::ipa::server::dns: true
 
 ipa::server::users:
   'fabian.vanderhoeven':

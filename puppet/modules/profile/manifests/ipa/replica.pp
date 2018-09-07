@@ -1,20 +1,12 @@
-class profile::ipa::server (
+class profile::ipa::replica (
   String            $version,
-  String            $domain,
-  String            $dm_password,
-  String            $admin_password,
   Boolean           $managed         = false,
   Boolean           $manage_firewall = true,
-  Optional[String]  $shell           = '/bin/bash',
   Optional[Boolean] $dns             = false,
 ) {
   if $managed {
-    class { '::ipa::server':
+    class { '::ipa::replica':
       version         => $version,
-      domain          => $domain,
-      dm_password     => $dm_password,
-      admin_password  => $admin_password,
-      shell           => $shell,
       dns             => $dns,
       manage_firewall => $manage_firewall,
     }
