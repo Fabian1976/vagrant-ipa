@@ -2,13 +2,25 @@
 roles:
   - role::ipa::server
 
-profile::ipa::server::version: '4.5.4'
+profile::ipa::server::version: '4.6.4'
 profile::ipa::server::domain: 'vermont24-7.local'
 profile::ipa::server::dm_password: 'redhat123'
 profile::ipa::server::admin_password: 'redhat123'
 profile::ipa::server::shell: '/bin/bash'
 profile::ipa::server::managed: true
 profile::ipa::server::dns: true
+
+ipa::server::usergroups:
+  'vermont_users':
+    description: 'Users werkzaam bij Vermont'
+  'vermont_admins':
+    description: 'Admin users werkzaam bij Vermont'
+  'test':
+    description: 'Test inherited group'
+    memberofgroup:
+      'vermont_users':
+        type: group
+        ensure: present
 
 ipa::server::users:
   'fabian.vanderhoeven':
@@ -22,16 +34,6 @@ ipa::server::users:
         ensure: present
       'vermont_admins':
         ensure: absent
-ipa::server::usergroups:
-  'vermont_users':
-    description: 'Users werkzaam bij Vermont'
-  'vermont_admins':
-    description: 'Admin users werkzaam bij Vermont'
-  'test':
-    description: 'Test inherited group'
-    memberofgroup:
-      'vermont_users':
-        ensure: present
 
 ipa::server::hostgroups:
   'testhostgroup':
@@ -39,12 +41,6 @@ ipa::server::hostgroups:
       'ipa01.vermont24-7.local':
         type: 'host'
         ensure: present
-  ipaservers:
-    members:
-      ipa01.vermont24-7.local:
-        type: 'host'
-      ipa02.vermont24-7.local:
-        type: 'host'
 
 ipa::server::dnszones:
   '10.10.10.in-addr.arpa':
@@ -65,7 +61,8 @@ ipa::server::dnsrecords:
 
 ipa::server::dnsforwardzones:
   'windows.vermont24-7.local':
-    forwarder: '10.10.10.116'
+    forwarder:
+      - '10.10.10.116'
 
 ipa::server::sudorules:
   'sudo_vermont_admins':

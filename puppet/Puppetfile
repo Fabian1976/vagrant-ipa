@@ -7,4 +7,4 @@ mod 'puppetlabs-firewall', '1.11.0'
 mod 'cmc-ipa',
   :git => 'https://github.com/Fabian1976/puppet-ipa.git',
 #  :git => 'https://github.com/ConclusionMC/puppet-ipa.git',
-  :ref => '1.4.1'
+  :ref => '1.6.0'
